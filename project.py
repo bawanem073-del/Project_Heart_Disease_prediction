@@ -4,13 +4,19 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
+
 df = pd.read_csv("C:/Users/LOQ/OneDrive/Desktop/health_data.csv")
 
+print(df.shape)
+print(df.info())
+print(df.isnull().sum())
+print(df.describe())
 
 sns.countplot(x = "Heart Disease", data = df)
 plt.show()
@@ -46,16 +52,30 @@ y = df["Heart Disease"]
 #data spliting
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
 
-#data scaling
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.fit_transform(X_test)
+num_feature = ["Chest pain type", "BP", "EKG results", "Max HR", "ST depression", "Number of vessels fluro", "Thallium"]
 
-#model
-model = LogisticRegression()
-model.fit(X_train, y_train)
+#Pipeline Implementation
 
-predict_hd = model.predict(X_test)
+trf1 = ColumnTransformer([("num", StandardScaler(), num_feature)])
+
+pipeline = Pipeline([("preprocessing", trf1),
+                     ("Classifier", LogisticRegression())])
+
+pipeline.fit(X_train, y_train)
+
+predict_hd = pipeline.predict(X_test)
+
+
+# #data scaling
+# scaler = StandardScaler()
+# X_train = scaler.fit_transform(X_train)
+# X_test = scaler.fit_transform(X_test)
+
+# #model
+# model = LogisticRegression()
+# model.fit(X_train, y_train)
+
+# predict_hd = model.predict(X_test)
 
 acs = accuracy_score(y_test, predict_hd)
 pcs = precision_score(y_test, predict_hd)
