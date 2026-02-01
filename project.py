@@ -1,6 +1,6 @@
 
-
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -9,7 +9,6 @@ from sklearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-
 
 df = pd.read_csv("C:/Users/LOQ/OneDrive/Desktop/health_data.csv")
 
@@ -61,42 +60,57 @@ trf1 = ColumnTransformer([("num", StandardScaler(), num_feature)])
 pipeline = Pipeline([("preprocessing", trf1),
                      ("Classifier", LogisticRegression())])
 
+pipeline2 = Pipeline([("preprocessing", trf1),
+                      ("Classifier", RandomForestClassifier(n_estimators=100,
+                                                            random_state=42))])
+
 pipeline.fit(X_train, y_train)
+pipeline2.fit(X_train, y_train)
 
 predict_hd = pipeline.predict(X_test)
+predict_rfc = pipeline2.predict(X_test)
+
+ 
+
+print("Evaluation Metrics - Logistic Regression")
+print("Accuracy Score : ",accuracy_score(y_test, predict_hd))
+print("Precision Score: ", precision_score(y_test, predict_hd))
+print("Recall Score : ", recall_score(y_test, predict_hd))
+print("F1 Score : ", f1_score(y_test, predict_hd))
+
+print("Evaluation Metrics - Random Forest Classifier")
+print("Accuracy Score : ",accuracy_score(y_test, predict_rfc))
+print("Precision Score: ", precision_score(y_test, predict_rfc))
+print("Recall Score : ", recall_score(y_test, predict_rfc))
+print("F1 Score : ", f1_score(y_test, predict_rfc))
 
 
-# #data scaling
-# scaler = StandardScaler()
-# X_train = scaler.fit_transform(X_train)
-# X_test = scaler.fit_transform(X_test)
 
-# #model
-# model = LogisticRegression()
-# model.fit(X_train, y_train)
-
-# predict_hd = model.predict(X_test)
-
-acs = accuracy_score(y_test, predict_hd)
-pcs = precision_score(y_test, predict_hd)
-res = recall_score(y_test, predict_hd)
-fs = f1_score(y_test, predict_hd)
-cm = confusion_matrix(y_test, predict_hd)
-
-print("Accuracy Score : ",acs)
-print("Precision Score: ", pcs)
-print("Recall Score : ", res)
-print("F1 Score : ", fs)
 
 # Plot heatmap
-plt.figure(figsize=(5,4))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+
+
+plt.figure(figsize = (14, 5))
+plt.subplot(1,2,1)
+# plt.figure(figsize=(5,4))
+sns.heatmap(confusion_matrix(y_test, predict_hd), annot=True, fmt='d', cmap='Blues',
             xticklabels=['Predicted 0', 'Predicted 1'],
             yticklabels=['Actual 0', 'Actual 1'])
 
 plt.xlabel("Predicted Label")
 plt.ylabel("Actual Label")
-plt.title("Confusion Matrix Heatmap")
+plt.title("Confusion Matrix For Logistic Regression")
+
+plt.subplot(1,2,2)
+
+sns.heatmap(confusion_matrix(y_test, predict_rfc), annot=True, fmt='d', cmap='Blues',
+            xticklabels=['Predicted 0', 'Predicted 1'],
+            yticklabels=['Actual 0', 'Actual 1'])
+
+plt.xlabel("Predicted Label")
+plt.ylabel("Actual Label")
+plt.title("Confusion Matrix For Random Forest Classifier")
+
 plt.show()
 
 
