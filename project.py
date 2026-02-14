@@ -1,6 +1,7 @@
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -61,15 +62,18 @@ pipeline = Pipeline([("preprocessing", trf1),
                      ("Classifier", LogisticRegression())])
 
 pipeline2 = Pipeline([("preprocessing", trf1),
-                      ("Classifier", RandomForestClassifier(n_estimators=100,
-                                                            random_state=42))])
+                      ("Classifier", RandomForestClassifier(n_estimators=100, random_state=42))])
+
+pipeline3 = Pipeline([("preprocessing", trf1),
+                      ("Clssifier", DecisionTreeClassifier( random_state=42))])                      
 
 pipeline.fit(X_train, y_train)
 pipeline2.fit(X_train, y_train)
+pipeline3.fit(X_train, y_train)
 
 predict_hd = pipeline.predict(X_test)
 predict_rfc = pipeline2.predict(X_test)
-
+predict_dtc = pipeline3.predict(X_test)
  
 
 print("Evaluation Metrics - Logistic Regression")
@@ -84,7 +88,11 @@ print("Precision Score: ", precision_score(y_test, predict_rfc))
 print("Recall Score : ", recall_score(y_test, predict_rfc))
 print("F1 Score : ", f1_score(y_test, predict_rfc))
 
-
+print("Evaluation Metrics - Decision Tree  Classifier")
+print("Accuracy Score : ",accuracy_score(y_test, predict_dtc))
+print("Precision Score: ", precision_score(y_test, predict_dtc))
+print("Recall Score : ", recall_score(y_test, predict_dtc))
+print("F1 Score : ", f1_score(y_test, predict_dtc))
 
 
 # Plot heatmap
