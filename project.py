@@ -100,7 +100,7 @@ print("F1 Score : ", f1_score(y_test, predict_dtc))
 
 plt.figure(figsize = (14, 5))
 plt.subplot(1,2,1)
-# plt.figure(figsize=(5,4))
+
 sns.heatmap(confusion_matrix(y_test, predict_hd), annot=True, fmt='d', cmap='Blues',
             xticklabels=['Predicted 0', 'Predicted 1'],
             yticklabels=['Actual 0', 'Actual 1'])
