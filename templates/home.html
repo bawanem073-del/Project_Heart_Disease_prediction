@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CardioVision AI - Prediction Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>❤️ CardioVision AI</h2>
+    </div>
+
+    <div class="main">
+
+        <div class="card">
+            <h2>87.04%</h2>
+            <p>Model Accuracy</p>
+        </div>
+
+        <form action="/predictdata" method="POST">
+            <div class="form-grid">
+
+                <div>
+                    <label>Age</label>
+                    <input type="number" name="age" required>
+                </div>
+
+                <div>
+                    <label>Sex</label>
+                    <select name="sex" required>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Chest Pain Type</label>
+                    <select name="chest_pain_type" required>
+                        <option value="1">Type 1</option>
+                        <option value="2">Type 2</option>
+                        <option value="3">Type 3</option>
+                        <option value="4">Type 4</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Blood Pressure</label>
+                    <input type="number" name="bp" required>
+                </div>
+
+                <div>
+                    <label>Cholesterol</label>
+                    <input type="number" name="cholesterol" required>
+                </div>
+
+                <div>
+                    <label>FBS Over 120</label>
+                    <select name="fbs_over_120" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>EKG Results</label>
+                    <select name="ekg_results" required>
+                        <option value="0">Normal</option>
+                        <option value="1">Abnormal</option>
+                        <option value="2">High Probability</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Maximum Heart Rate</label>
+                    <input type="number" name="max_hr" required>
+                </div>
+
+                <div>
+                    <label>Exercise Angina</label>
+                    <select name="exercise_angina" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>ST Depression</label>
+                    <input type="number" step="0.1" name="st_depression" required>
+                </div>
+
+                <div>
+                    <label>Slope Of ST</label>
+                    <select name="slope_of_st" required>
+                        <option value="1">Up Sloping</option>
+                        <option value="2">Flat</option>
+                        <option value="3">Down Sloping</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Number Of Vessels Fluro</label>
+                    <select name="number_of_vessels_fluro" required>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Thallium</label>
+                    <select name="thallium" required>
+                        <option value="3">Normal</option>
+                        <option value="6">Fixed Defect</option>
+                        <option value="7">Reversible Defect</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit" class="predict-btn">
+                Predict Heart Risk
+            </button>
+
+        </form>
+
+
+        {% if results is defined %}
+        
+        <div class="result-card">
+        
+            {% if results == 1 %}
+            <div class="danger">
+                <h2>⚠ High Risk</h2>
+                <p>Heart Disease Detected</p>
+            </div>
+            {% else %}
+            <div class="safe">
+                <h2>✅ Low Risk</h2>
+                <p>No Heart Disease Detected</p>
+            </div>
+            {% endif %}
+        
+        </div>
+        
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
