@@ -133,6 +133,7 @@ class ModelTrainer:
 
             predicted = best_model.predict(X_test)
             acc_score = accuracy_score(y_test, predicted)
+            
 
             return acc_score 
 
