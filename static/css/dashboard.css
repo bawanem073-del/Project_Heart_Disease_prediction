@@ -119,28 +119,6 @@ select:focus{
     margin-top:25px;
 }
 
-.danger,
-.safe{
-    padding:20px;
-    border-radius:16px;
-    text-align:center;
-    margin-top:20px;
-}
-
-.danger{
-    background:#7f1d1d;
-    border:1px solid #ef4444;
-}
-
-.safe{
-    background:#064e3b;
-    border:1px solid #10b981;
-}
-
-.danger h2,
-.safe h2{
-    margin-bottom:10px;
-}
 
 /* Scrollbar */
 
@@ -173,4 +151,107 @@ select:focus{
     .form-grid{
         grid-template-columns:1fr;
     }
+}
+
+
+
+.progress-container{
+    width:100%;
+    height:32px;
+    background:#1d2c40;
+    border-radius:10px;
+    overflow:hidden;
+    margin:20px 0;
+}
+
+
+
+.report-card{
+    margin-top:30px;
+    background:#071426;
+    padding:30px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+.report-card h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#ffffff;
+}
+
+/* Metrics */
+
+.metric{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#0d1f35;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+
+.metric span{
+    color:#cbd5e1;
+}
+
+.metric strong{
+    font-size:16px;
+}
+
+/* Risk Meter */
+
+
+
+.progress-bar{
+    height:100%;
+    transition:width 0.8s ease;
+}
+
+.progress-bar.success{
+    background:#00c853;
+}
+
+.progress-bar.danger{
+    background:#ff4444;
+}
+
+/* Summary, Risk Factors, Recommendations */
+
+.summary-list,
+.risk-list,
+.recommendation-list{
+    list-style:none;
+    margin-top:10px;
+    margin-bottom:20px;
+    padding:0;
+}
+
+.summary-list li,
+.risk-list li,
+.recommendation-list li{
+    background:#0d1f35;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:8px;
+}
+
+/* Section Titles */
+
+.report-card h3{
+    margin-top:20px;
+    margin-bottom:12px;
+    color:#60a5fa;
+}
+
+/* Footer */
+
+.report-footer{
+    margin-top:25px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:15px;
+    color:#94a3b8;
 }

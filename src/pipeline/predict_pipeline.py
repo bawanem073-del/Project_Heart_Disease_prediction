@@ -22,7 +22,24 @@ class PredictPipeline:
 
 
         except Exception  as e:
-            raise CustomException
+            raise CustomException(e, sys)
+        
+    def predict_proba(self, features):
+        try:
+            model_path = 'artifacts/model.pkl'
+            preprocessor_path = 'artifacts/preprocessor.pkl'
+
+            model = load_object(file_path=model_path)
+            preprocessor = load_object(file_path=preprocessor_path)
+
+            data_scaled = preprocessor.transform(features)
+
+            probabilities = model.predict_proba(data_scaled)
+
+            return probabilities
+
+        except Exception as e:
+            raise CustomException(e, sys)    
         
 
 class Customdata:
