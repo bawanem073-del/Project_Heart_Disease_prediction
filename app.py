@@ -1,5 +1,5 @@
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for, session
 import numpy as np
 import pandas as pd
 
@@ -11,6 +11,9 @@ application = Flask(__name__)
 
 app = application
 
+
+app.secret_key = "cardiovision_secret_key"
+
 MODEL_ACCURACY = 88.89
 
 @app.route('/')
@@ -20,8 +23,6 @@ def index():
 
 
 @app.route('/predictdata', methods=['GET', 'POST'])
-
-
 
 def predict_datapoint():
     if request.method == 'GET':
@@ -98,22 +99,53 @@ def predict_datapoint():
                 "Monitor BP periodically"
             ]
 
-        
+        # Store report data in session
 
-        return render_template('home.html', prediction=prediction,
+        session['prediction'] = int(prediction)
 
-                                            risk_score=risk_score,
-                                            confidence=confidence,
+        session['risk_score'] = risk_score
+        session['confidence'] = confidence
 
-                                            risk_factors=risk_factors,
-                                            recommendations=recommendations,
+        session['risk_factors'] = risk_factors
+        session['recommendations'] = recommendations
 
-                                            age=age,
-                                            bp=bp,
-                                            cholesterol=cholesterol,
-                                            max_hr=max_hr,
-                                            gender = gender
-                                            )    
+        session['age'] = age
+        session['bp'] = bp
+        session['cholesterol'] = cholesterol
+        session['max_hr'] = max_hr
+        session['gender'] = gender
+
+
+        return redirect(url_for('report'))
     
+
+@app.route('/report')
+def report():
+
+    if session.get('prediction') is None:
+        return redirect(url_for('predict_datapoint'))
+
+    return render_template(
+        'report.html',
+        prediction=session.get('prediction'),
+        risk_score=session.get('risk_score'),
+        confidence=session.get('confidence'),
+        risk_factors=session.get('risk_factors'),
+        recommendations=session.get('recommendations'),
+        age=session.get('age'),
+        bp=session.get('bp'),
+        cholesterol=session.get('cholesterol'),
+        max_hr=session.get('max_hr'),
+        gender=session.get('gender')
+    )
+
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)    

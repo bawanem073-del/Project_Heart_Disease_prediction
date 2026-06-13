@@ -1,251 +1,260 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CardioVision AI</title>
+    <title>CardioVision AI</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-body{
-    background:#070b14;
-    color:white;
-    overflow-x:hidden;
-}
+        body {
+            background: #070b14;
+            color: white;
+            overflow-x: hidden;
+        }
 
-.hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:0 8%;
-}
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 8%;
+        }
 
-.container{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:center;
-}
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
 
-.badge{
-    display:inline-block;
-    padding:10px 18px;
-    border-radius:50px;
-    background:rgba(37,99,235,.15);
-    color:#60a5fa;
-    border:1px solid rgba(96,165,250,.3);
-}
+        .badge {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 50px;
+            background: rgba(37, 99, 235, .15);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, .3);
+        }
 
-h1{
-    font-size:4rem;
-    line-height:1.1;
-    margin-top:20px;
-}
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-top: 20px;
+        }
 
-.highlight{
-    color:#3b82f6;
-}
+        .highlight {
+            color: #3b82f6;
+        }
 
-p{
-    margin-top:25px;
-    color:#94a3b8;
-    font-size:1.1rem;
-}
+        p {
+            margin-top: 25px;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
 
-.btns{
-    margin-top:40px;
-    display:flex;
-    gap:20px;
-}
+        .btns {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+        }
 
-.btn{
-    padding:16px 30px;
-    border:none;
-    border-radius:14px;
-    text-decoration:none;
-    font-weight:600;
-    transition:.3s;
-}
+        .btn {
+            padding: 16px 30px;
+            border: none;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .3s;
+        }
 
-.primary{
-    background:#2563eb;
-    color:white;
-}
+        .primary {
+            background: #2563eb;
+            color: white;
+        }
 
-.primary:hover{
-    transform:translateY(-3px);
-}
+        .primary:hover {
+            transform: translateY(-3px);
+        }
 
-.secondary{
-    border:1px solid #334155;
-    color:white;
-}
+        .secondary {
+            border: 1px solid #334155;
+            color: white;
+        }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
-}
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
 
-.card{
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:25px;
-}
+        .card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+        }
 
-.card h2{
-    font-size:2rem;
-    color:#3b82f6;
-}
+        .card h2 {
+            font-size: 2rem;
+            color: #3b82f6;
+        }
 
-.card p{
-    margin-top:10px;
-    font-size:.95rem;
-}
+        .card p {
+            margin-top: 10px;
+            font-size: .95rem;
+        }
 
-.floating{
-    position:absolute;
-    width:400px;
-    height:400px;
-    background:#2563eb;
-    filter:blur(180px);
-    opacity:.15;
-    top:-100px;
-    right:-100px;
-}
+        .floating {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: .15;
+            top: -100px;
+            right: -100px;
+        }
 
-.stats{
-    display:flex;
-    gap:25px;
-    margin-top:40px;
-}
+        .stats {
+            display: flex;
+            gap: 25px;
+            margin-top: 40px;
+        }
 
-.stat{
-    text-align:center;
-}
+        .stat {
+            text-align: center;
+        }
 
-.stat h3{
-    color:#3b82f6;
-    font-size:2rem;
-}
+        .stat h3 {
+            color: #3b82f6;
+            font-size: 2rem;
+        }
 
-@media(max-width:900px){
+        @media(max-width:900px) {
 
-.container{
-    grid-template-columns:1fr;
-}
+            .container {
+                grid-template-columns: 1fr;
+            }
 
-h1{
-    font-size:3rem;
-}
+            h1 {
+                font-size: 3rem;
+            }
 
-.cards{
-    margin-top:40px;
-}
+            .cards {
+                margin-top: 40px;
+            }
 
-}
-</style>
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="floating"></div>
-
-<section class="hero">
-
-<div class="container">
-
-<div>
-
-<span class="badge">
-❤️ AI Powered Healthcare
-</span>
-
-<h1>
-Predict Heart Disease
-<span class="highlight">Before It Happens</span>
-</h1>
-
-<p>
-Advanced Machine Learning system trained on clinical heart disease data.
-Get accurate predictions in seconds and identify cardiovascular risks early.
-</p>
-
-<div class="stats">
-
-<div class="stat">
-    <h3>88.89%</h3>
-    <p>Accuracy</p>
-</div>
+    <div class="floating"></div>
 
 
-<div class="stat">
-<h3>13+</h3>
-<p>Features</p>
-</div>
 
-<div class="stat">
-<h3>24/7</h3>
-<p>Available</p>
-</div>
 
-</div>
 
-<div class="btns">
 
-<a href="/predictdata" class="btn primary">
-Start Prediction →
-</a>
 
-<a href="#features" class="btn secondary">
-Learn More
-</a>
+    <section class="hero">
 
-</div>
+        <div class="container">
 
-</div>
+            <div>
 
-<div class="cards">
+                <span class="badge">
+                    ❤️ AI Powered Healthcare
+                </span>
 
-<div class="card">
-<h2>2450+</h2>
-<p>Predictions Generated</p>
-</div>
+                <h1>
+                    Predict Heart Disease
+                    <span class="highlight">Before It Happens</span>
+                </h1>
 
-<div class="card">
-<h2>88.89%</h2>
-<p>Model Accuracy</p>
-</div>
+                <p>
+                    Advanced Machine Learning system trained on clinical heart disease data.
+                    Get accurate predictions in seconds and identify cardiovascular risks early.
+                </p>
 
-<div class="card">
-<h2>13</h2>
-<p>Medical Parameters</p>
-</div>
+                <div class="stats">
 
-<div class="card">
-<h2>AI</h2>
-<p>Real-time Risk Analysis</p>
-</div>
+                    <div class="stat">
+                        <h3>88.89%</h3>
+                        <p>Accuracy</p>
+                    </div>
 
-</div>
 
-</div>
+                    <div class="stat">
+                        <h3>13+</h3>
+                        <p>Features</p>
+                    </div>
 
-</section>
+                    <div class="stat">
+                        <h3>24/7</h3>
+                        <p>Available</p>
+                    </div>
+
+                </div>
+
+                <div class="btns">
+
+                    <a href="/predictdata" class="btn primary">
+                        Start Prediction →
+                    </a>
+
+                    <a href="/about" class="btn secondary">
+                        Learn More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h2>2450+</h2>
+                    <p>Predictions Generated</p>
+                </div>
+
+                <div class="card">
+                    <h2>88.89%</h2>
+                    <p>Model Accuracy</p>
+                </div>
+
+                <div class="card">
+                    <h2>13</h2>
+                    <p>Medical Parameters</p>
+                </div>
+
+                <div class="card">
+                    <h2>AI</h2>
+                    <p>Real-time Risk Analysis</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 
 </body>
+
 </html>

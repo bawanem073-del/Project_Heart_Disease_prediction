@@ -10,6 +10,7 @@ body{
     background:#070b14;
     color:white;
     min-height:100vh;
+    padding:20px;
 }
 
 /* Sidebar */
@@ -96,6 +97,9 @@ select:focus{
 
 .predict-btn{
     width:100%;
+    display:block;
+    text-align:center;
+    text-decoration:none;
     margin-top:25px;
     padding:16px;
     background:#2563eb;
@@ -167,7 +171,8 @@ select:focus{
 
 
 .report-card{
-    margin-top:30px;
+    max-width:900px;
+    margin:40px auto;
     background:#071426;
     padding:30px;
     border-radius:16px;
@@ -255,3 +260,9 @@ select:focus{
     padding-top:15px;
     color:#94a3b8;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+
